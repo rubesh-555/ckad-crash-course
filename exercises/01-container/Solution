@@ -1,1 +1,5 @@
-I fork that repo 
+Inspected the dockerfile and build the image using docker build -t nodejs-hello-world:1.0
+Ran the container in detached mode and mapped host port 80 to container port 3000.
+verify the application was accesible on port 80 using curl http://localhost:3000.
+Retrieved application logs with docker logs nodejs-hello.
+saved the container images to nodejs-hello-world-1.0.tar
