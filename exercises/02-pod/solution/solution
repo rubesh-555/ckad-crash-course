@@ -1,0 +1,11 @@
+Create the namespace using (kubectl create namespace rubesh)
+Create the Pod in my namespace using command (kubectl run mypod --image=nginx:latest --restart=Never --port=80 --namespace=rubesh)
+Check pod status,By using command (kubectl get pods -n rubesh)
+Check all details of a pod—including metadata, spec, status, container info, conditions, and events—for debugging or inspection,By using command (kubectl describe pod mypod -n rubesh)
+You can shell into the container and run the command,By using command(kubectl exec -it mypod -n rubesh -- /bin/sh)
+Retrieve the IP address of the Pod,By using command(kubectl get pods -o wide -n rubesh)
+The logs of the Pod should show a single line indicating our request,By using command (kubectl logs mypod -n rubesh)
+For deleting the Pods and NS, By using command (kubectl delete pod mypod -n rubesh and kubectl delete namespace rubesh)
+
+
+
