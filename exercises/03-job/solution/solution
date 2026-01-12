@@ -1,4 +1,4 @@
 Start by creating a YAML manifest file named rubesh-job.yaml
 Create the Job from the YAML manifest using command (kubectl apply -f rubesh-job.yaml)
 Pick one of the Pod by name and get its logs,(kubectl logs rubesh-4qk96)
-Deleting the job will also delete the Pods controlled by the Job,By using commands (kubectl delete job rubesh-job)
+Deleting the job will also delete the Pods controlled by the Job,By using command (kubectl delete job rubesh-job)
