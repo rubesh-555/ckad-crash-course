@@ -1,20 +1,18 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: current-date
+  name: disk-usage
 spec:
+  schedule: "*/1 * * * *"
   jobTemplate:
-    metadata:
-      name: current-date
     spec:
       template:
         spec:
           restartPolicy: Never
           containers:
-          - command:
+          - name: disk-check
+            image: busybox
+            command:
             - /bin/sh
             - -c
-            - 'echo "Current date: $(date)"'
-            image: nginx:1.21.6
-            name: current-date
-  schedule: '* * * * *'
+            - "df -h"
