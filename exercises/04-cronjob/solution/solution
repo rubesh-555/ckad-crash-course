@@ -1,0 +1,40 @@
+Create a CronJob named Disk-usage that runs every minute.Use the container image busybox.
+
+Watch the jobs as they are being scheduled.
+
+PS C:\Users\VISHNU\mysite\rubesh\ckad-crash-course\exercises\04-cronjob\solution> kubectl get jobs --watch
+NAME                  STATUS     COMPLETIONS   DURATION   AGE
+disk-usage-29480480   Complete   1/1           19s        2m48s
+disk-usage-29480482   Complete   1/1           6s         48s
+
+Identify one of the Pods that ran the CronJob and render the logs.
+
+PS C:\Users\VISHNU\mysite\rubesh\ckad-crash-course\exercises\04-cronjob\solution> kubectl get pods --show-labels
+NAME                        READY   STATUS      RESTARTS   AGE     LABELS
+disk-usage-29480486-z8tmw   0/1     Completed   0          2m21s   batch.kubernetes.io/controller-uid=700b44e2-7595-47fa-9966-9d739f66f0b1,batch.kubernetes.
+
+PS C:\Users\VISHNU\mysite\rubesh\ckad-crash-course\exercises\04-cronjob\solution> kubectl logs job/disk-usage-29480496 -n default
+Filesystem                Size      Used Available Use% Mounted on
+overlay                1006.9G      5.3G    950.3G   1% /
+tmpfs                    64.0M         0     64.0M   0% /dev
+shm                      64.0M         0     64.0M   0% /dev/shm
+/dev/sde               1006.9G      5.3G    950.3G   1% /dev/termination-log
+/dev/sde               1006.9G      5.3G    950.3G   1% /etc/resolv.conf
+/dev/sde               1006.9G      5.3G    950.3G   1% /etc/hostname
+/dev/sde               1006.9G      5.3G    950.3G   1% /etc/hosts
+tmpfs                     7.6G     12.0K      7.6G   0% /var/run/secrets/kubernetes.io/serviceaccount
+tmpfs                     3.8G         0      3.8G   0% /proc/acpi
+tmpfs                    64.0M         0     64.0M   0% /proc/interrupts
+tmpfs                    64.0M         0     64.0M   0% /proc/kcore
+tmpfs                    64.0M         0     64.0M   0% /proc/keys
+tmpfs                    64.0M         0     64.0M   0% /proc/latency_stats
+tmpfs                    64.0M         0     64.0M   0% /proc/timer_list
+tmpfs                     3.8G         0      3.8G   0% /proc/scsi
+tmpfs                     3.8G         0      3.8G   0% /sys/firmware
+
+Determine the number of successful executions the CronJob will keep in its history.
+
+PS C:\Users\VISHNU\mysite\rubesh\ckad-crash-course\exercises\04-cronjob\solution> kubectl get cronjob disk-usage -o yaml | findstr successfulJobsHistoryLimit
+  successfulJobsHistoryLimit: 3
+
+Delete the CronJob (kubectl delete cronjob disk-usage)
