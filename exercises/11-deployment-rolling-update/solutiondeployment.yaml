@@ -1,19 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
-  labels:
-    tier: backend
+  name: apache
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: v1
+      app: apache
   template:
     metadata:
       labels:
-        app: v1
+        app: apache
     spec:
       containers:
-      - image: nginx:1.23.0
-        name: nginx
+      - name: apache
+        image: httpd:2.4
